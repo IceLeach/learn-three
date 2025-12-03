@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons';
+import GUI from 'three/addons/libs/lil-gui.module.min.js';
 import { useThrottleFn } from 'ahooks';
 import styles from './index.less';
+
+type MeshType = THREE.Mesh<THREE.BoxGeometry, THREE.MeshLambertMaterial, THREE.Object3DEventMap>;
 
 const Cube: React.FC = () => {
   const sceneRef = React.useRef<THREE.Scene>();
@@ -28,6 +31,21 @@ const Cube: React.FC = () => {
     renderer.setSize(width, height);
   }, { wait: 100 });
 
+  const createGui = (data: { mesh: MeshType, pointLight: THREE.PointLight }) => {
+    const { mesh, pointLight } = data;
+    const gui = new GUI();
+    const meshFolder = gui.addFolder('立方体');
+    meshFolder.addColor(mesh.material, 'color');
+    meshFolder.add(mesh.position, 'x').step(10);
+    meshFolder.add(mesh.position, 'y').step(10);
+    meshFolder.add(mesh.position, 'z').step(10);
+    const lightFolder = gui.addFolder('灯光');
+    lightFolder.add(pointLight.position, 'x').step(10);
+    lightFolder.add(pointLight.position, 'y').step(10);
+    lightFolder.add(pointLight.position, 'z').step(10);
+    lightFolder.add(pointLight, 'intensity').step(1000);
+  }
+
   const init = () => {
     const scene = new THREE.Scene();
     const geometry = new THREE.BoxGeometry(100, 100, 100);
@@ -40,6 +58,7 @@ const Cube: React.FC = () => {
     const pointLight = new THREE.PointLight('#fff', 10000);
     pointLight.position.set(80, 80, 80);
     scene.add(pointLight);
+    createGui({ mesh, pointLight });
     const width = ref.current?.clientWidth || window.innerWidth;
     const height = ref.current?.clientHeight || window.innerHeight;
     const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);

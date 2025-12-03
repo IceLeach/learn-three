@@ -5,7 +5,7 @@ import { Typography } from 'antd';
 const Guide: React.FC = () => {
   return (
     <Typography>
-      <Typography.Title level={2}>第一个 3D 场景</Typography.Title>
+      <Typography.Title level={2}>第一个 3D 场景 & dat.gui 可视化调试</Typography.Title>
       <Typography.Paragraph>
         <ul>
           <li><Link to='/cube'>Native</Link></li>
