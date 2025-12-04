@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
-import * as THREE from 'three';
+import { BoxGeometry, Mesh, MeshLambertMaterial, Object3DEventMap, PointLight } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import styles from './index.less';
 
-type MeshType = THREE.Mesh<THREE.BoxGeometry, THREE.MeshLambertMaterial, THREE.Object3DEventMap>;
+type MeshType = Mesh<BoxGeometry, MeshLambertMaterial, Object3DEventMap>;
 
 interface GuiProps {
   meshRef: React.RefObject<MeshType>;
-  pointLightRef: React.RefObject<THREE.PointLight>;
+  pointLightRef: React.RefObject<PointLight>;
 }
 
 const Gui: React.FC<GuiProps> = (props) => {
@@ -30,10 +30,15 @@ const Gui: React.FC<GuiProps> = (props) => {
     lightFolder.add(pointLight.position, 'y').step(10);
     lightFolder.add(pointLight.position, 'z').step(10);
     lightFolder.add(pointLight, 'intensity').step(1000);
+    return gui;
   }
 
   useEffect(() => {
-    createGui();
+    const gui = createGui();
+
+    return () => {
+      gui?.destroy();
+    };
   }, []);
 
   return null;
@@ -42,7 +47,7 @@ const Gui: React.FC<GuiProps> = (props) => {
 const Scene: React.FC = () => {
   const { camera } = useThree();
   const meshRef = React.useRef<MeshType>(null);
-  const pointLightRef = React.useRef<THREE.PointLight>(null);
+  const pointLightRef = React.useRef<PointLight>(null);
 
   useEffect(() => {
     camera.lookAt(0, 0, 0);
