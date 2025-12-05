@@ -2,34 +2,31 @@ import React, { useEffect } from 'react';
 import { AxesHelper, BoxGeometry, Mesh, MeshLambertMaterial, Object3DEventMap, PerspectiveCamera, PointLight, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
-import { useThrottleFn } from 'ahooks';
 import styles from './index.less';
 
 type MeshType = Mesh<BoxGeometry, MeshLambertMaterial, Object3DEventMap>;
 
 const Cube: React.FC = () => {
-  const sceneRef = React.useRef<Scene>();
-  const cameraRef = React.useRef<PerspectiveCamera>();
-  const rendererRef = React.useRef<WebGLRenderer>();
   const ref = React.useRef<HTMLDivElement>(null);
+
+  const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
+    const { renderer, camera } = data;
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    if (canvas.width !== width || canvas.height !== height) {
+      renderer.setSize(width, height, false);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+  }
 
   const render = (data: { renderer: WebGLRenderer, scene: Scene, camera: PerspectiveCamera }) => {
     const { renderer, scene, camera } = data;
-    requestAnimationFrame(() => render(data));
+    resetSize({ renderer, camera });
     renderer.render(scene, camera);
+    requestAnimationFrame(() => render(data));
   }
-
-  const { run: resetSize } = useThrottleFn(() => {
-    const scene = sceneRef.current;
-    const camera = cameraRef.current;
-    const renderer = rendererRef.current;
-    if (!scene || !camera || !renderer) return;
-    const width = ref.current?.clientWidth || window.innerWidth;
-    const height = ref.current?.clientHeight || window.innerHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  }, { wait: 100 });
 
   const createGui = (data: { mesh: MeshType, pointLight: PointLight }) => {
     const { mesh, pointLight } = data;
@@ -59,29 +56,24 @@ const Cube: React.FC = () => {
     const pointLight = new PointLight('#fff', 10000);
     pointLight.position.set(80, 80, 80);
     scene.add(pointLight);
-    const gui = createGui({ mesh, pointLight });
-    const width = ref.current?.clientWidth || window.innerWidth;
-    const height = ref.current?.clientHeight || window.innerHeight;
+    const renderer = new WebGLRenderer();
+    const canvas = renderer.domElement;
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    ref.current?.append(canvas);
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
     const camera = new PerspectiveCamera(60, width / height, 1, 1000);
     camera.position.set(200, 200, 200);
     camera.lookAt(0, 0, 0);
-    const renderer = new WebGLRenderer();
-    renderer.setSize(width, height);
-    ref.current?.append(renderer.domElement);
     render({ renderer, scene, camera });
     const controls = new OrbitControls(camera, renderer.domElement);
-    return { scene, camera, renderer, controls, gui };
+    const gui = createGui({ mesh, pointLight });
+    return { controls, gui };
   }
 
   useEffect(() => {
-    const { scene, camera, renderer, gui } = init();
-    sceneRef.current = scene;
-    cameraRef.current = camera;
-    rendererRef.current = renderer;
-    if (ref.current) {
-      const observer = new ResizeObserver(resetSize);
-      observer.observe(ref.current);
-    }
+    const { gui } = init();
 
     return () => {
       gui.destroy();
