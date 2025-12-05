@@ -27,7 +27,7 @@ const StaticFunctionHolder: React.FC = () => {
 const GlobalLayout: React.FC = () => {
   return (
     <>
-      <StyleProvider hashPriority='high'>
+      <StyleProvider>
         <ConfigProvider
           locale={zhCN}
           button={{ autoInsertSpace: false }}

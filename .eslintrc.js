@@ -5,7 +5,15 @@ module.exports = {
     'react/no-unknown-property': [
       'error',
       {
-        ignore: ['args', 'intensity', 'position', 'rotation', 'scale'],
+        ignore: [
+          'args',
+          'intensity',
+          'position',
+          'rotation',
+          'scale',
+          'attach',
+          'wireframe',
+        ],
       },
     ],
   },

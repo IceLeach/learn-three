@@ -60,7 +60,7 @@ const Cube: React.FC = () => {
     const canvas = renderer.domElement;
     canvas.style.width = '100%';
     canvas.style.height = '100%';
-    ref.current?.append(canvas);
+    ref.current?.appendChild(canvas);
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
     const camera = new PerspectiveCamera(60, width / height, 1, 1000);

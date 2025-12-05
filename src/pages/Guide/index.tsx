@@ -19,6 +19,11 @@ const Guide: React.FC = () => {
           <li><Link to='/frustum-r3f'>react-three-fiber</Link></li>
         </ul>
       </Typography.Paragraph>
+      <Typography.Title level={2}>BufferGeometry：顶点生成各种几何体</Typography.Title>
+      <ul>
+        <li><Link to='/vertice'>Native</Link></li>
+        <li><Link to='/vertice-r3f'>react-three-fiber</Link></li>
+      </ul>
     </Typography>
   );
 }
