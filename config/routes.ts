@@ -14,6 +14,8 @@ export default [
           { path: '/frustum-r3f', component: './Frustum/r3f' },
           { path: '/vertice', component: './Vertice' },
           { path: '/vertice-r3f', component: './Vertice/r3f' },
+          { path: '/model', component: './Model' },
+          { path: '/model-r3f', component: './Model/r3f' },
         ],
       },
     ],

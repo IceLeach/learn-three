@@ -13,6 +13,7 @@ module.exports = {
           'scale',
           'attach',
           'wireframe',
+          'side',
         ],
       },
     ],

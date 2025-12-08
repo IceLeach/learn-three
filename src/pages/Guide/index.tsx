@@ -24,6 +24,11 @@ const Guide: React.FC = () => {
         <li><Link to='/vertice'>Native</Link></li>
         <li><Link to='/vertice-r3f'>react-three-fiber</Link></li>
       </ul>
+      <Typography.Title level={2}>点模型、线模型、网格模型</Typography.Title>
+      <ul>
+        <li><Link to='/model'>Native</Link></li>
+        <li><Link to='/model-r3f'>react-three-fiber</Link></li>
+      </ul>
     </Typography>
   );
 }
