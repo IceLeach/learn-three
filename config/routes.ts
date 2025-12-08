@@ -16,6 +16,8 @@ export default [
           { path: '/vertice-r3f', component: './Vertice/r3f' },
           { path: '/model', component: './Model' },
           { path: '/model-r3f', component: './Model/r3f' },
+          { path: '/topography', component: './Topography' },
+          { path: '/topography-r3f', component: './Topography/r3f' },
         ],
       },
     ],

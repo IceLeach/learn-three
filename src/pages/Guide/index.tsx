@@ -29,6 +29,11 @@ const Guide: React.FC = () => {
         <li><Link to='/model'>Native</Link></li>
         <li><Link to='/model-r3f'>react-three-fiber</Link></li>
       </ul>
+      <Typography.Title level={2}>实战：随机山脉地形</Typography.Title>
+      <ul>
+        <li><Link to='/topography'>Native</Link></li>
+        <li><Link to='/topography-r3f'>react-three-fiber</Link></li>
+      </ul>
     </Typography>
   );
 }
