@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { BufferAttribute, BufferGeometry } from 'three';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Select } from 'antd';
 import styles from './index.less';
 
-const meshMap = {
-  triangle: (
+const Triangle: React.FC = () => {
+  return (
     <mesh>
       <bufferGeometry>
         <bufferAttribute
@@ -22,38 +23,62 @@ const meshMap = {
       </bufferGeometry>
       <meshBasicMaterial color='orange' wireframe />
     </mesh>
-  ),
-  plane: (
+  );
+}
+
+const Plane: React.FC = () => {
+  const geometryRef = useRef<BufferGeometry>(null);
+
+  useEffect(() => {
+    const geometry = geometryRef.current;
+    const indexes = new Uint16Array([0, 1, 2, 2, 1, 3]);
+    if (geometry) {
+      geometry.index = new BufferAttribute(indexes, 1);
+    }
+  }, []);
+
+  return (
     <mesh>
-      <bufferGeometry>
+      <bufferGeometry ref={geometryRef}>
         <bufferAttribute
           attach='attributes-position'
           args={[new Float32Array([
             0, 0, 0,
             100, 0, 0,
             0, 100, 0,
-            0, 100, 0,
-            100, 0, 0,
             100, 100, 0,
           ]), 3]}
         />
       </bufferGeometry>
       <meshBasicMaterial color='orange' wireframe />
     </mesh>
-  ),
-  planeGeometry: (
+  );
+}
+
+const Plane2: React.FC = () => {
+  return (
     <mesh>
       <planeGeometry args={[100, 100]} />
       <meshBasicMaterial color='orange' wireframe />
     </mesh>
-  ),
-  boxGeometry: (
+  );
+}
+
+const Box: React.FC = () => {
+  return (
     <mesh>
       <boxGeometry args={[100, 100, 100]} />
       <meshBasicMaterial color='orange' wireframe />
     </mesh>
-  ),
-} satisfies Record<string, React.ReactNode>;
+  );
+}
+
+const meshMap = {
+  triangle: Triangle,
+  plane: Plane,
+  plane2: Plane2,
+  box: Box,
+} satisfies Record<string, React.ComponentType>;
 
 type MeshType = keyof typeof meshMap;
 
@@ -64,6 +89,7 @@ interface SceneProps {
 const Scene: React.FC<SceneProps> = (props) => {
   const { meshType } = props;
   const { camera } = useThree();
+  const MeshComponent = meshMap[meshType];
 
   useEffect(() => {
     camera.lookAt(0, 0, 0);
@@ -71,7 +97,7 @@ const Scene: React.FC<SceneProps> = (props) => {
 
   return (
     <>
-      {meshMap[meshType]}
+      <MeshComponent />
       <axesHelper args={[200]} />
       <pointLight args={['#fff', 10000]} position={[80, 80, 80]} />
       <OrbitControls enableDamping={false} />
@@ -100,8 +126,8 @@ const Vertice: React.FC = () => {
         options={[
           { label: '三角形', value: 'triangle' },
           { label: '平面', value: 'plane' },
-          { label: 'PlaneGeometry', value: 'planeGeometry' },
-          { label: 'BoxGeometry', value: 'boxGeometry' },
+          { label: '平面2', value: 'plane2' },
+          { label: '立方体', value: 'box' },
         ]}
         value={meshType}
         onChange={setMeshType}

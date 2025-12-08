@@ -43,24 +43,22 @@ const createMeshMap = {
     const mesh = new Mesh(geometry, material);
     return mesh;
   },
-  planeGeometry: () => {
+  plane2: () => {
     const geometry = new PlaneGeometry(100, 100);
     const material = new MeshBasicMaterial({
       color: new Color('orange'),
       wireframe: true,
     });
     const mesh = new Mesh(geometry, material);
-    console.log('mesh', mesh);
     return mesh;
   },
-  boxGeometry: () => {
+  box: () => {
     const geometry = new BoxGeometry(100, 100, 100);
     const material = new MeshBasicMaterial({
       color: new Color('orange'),
       wireframe: true,
     });
     const mesh = new Mesh(geometry, material);
-    console.log('mesh', mesh);
     return mesh;
   },
 } satisfies Record<string, () => Mesh>;
@@ -130,8 +128,7 @@ const Vertice: React.FC = () => {
   }
 
   useEffect(() => {
-    const { scene } = init();
-    sceneRef.current = scene;
+    init();
   }, []);
 
   return (
@@ -141,8 +138,8 @@ const Vertice: React.FC = () => {
         options={[
           { label: '三角形', value: 'triangle' },
           { label: '平面', value: 'plane' },
-          { label: 'PlaneGeometry', value: 'planeGeometry' },
-          { label: 'BoxGeometry', value: 'boxGeometry' },
+          { label: '平面2', value: 'plane2' },
+          { label: '立方体', value: 'box' },
         ]}
         value={meshType}
         onChange={createMesh}
