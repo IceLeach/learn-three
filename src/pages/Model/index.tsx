@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { AxesHelper, BufferAttribute, BufferGeometry, Color, CylinderGeometry, DoubleSide, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Points, PointsMaterial, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
-import styles from './index.less';
 import { Select } from 'antd';
+import styles from './index.less';
 
 type ModelType = Points | Line | Mesh;
 
@@ -140,7 +140,7 @@ const Model: React.FC = () => {
     camera.lookAt(0, 0, 0);
     render({ renderer, scene, camera });
     const controls = new OrbitControls(camera, renderer.domElement);
-    return { scene, controls };
+    return { controls };
   }
 
   useEffect(() => {

@@ -80,7 +80,7 @@ const Topography: React.FC = () => {
     camera.lookAt(0, 0, 0);
     render({ renderer, scene, camera, mesh });
     const controls = new OrbitControls(camera, renderer.domElement);
-    return { scene, controls };
+    return { controls };
   }
 
   useEffect(() => {
