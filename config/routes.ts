@@ -19,7 +19,7 @@ export default [
           { path: '/topography', component: './Topography' },
           { path: '/topography-r3f', component: './Topography/r3f' },
           { path: '/material-texture', component: './MaterialTexture' },
-          // { path: '/material-texture-r3f', component: './MaterialTexture/r3f' },
+          { path: '/material-texture-r3f', component: './MaterialTexture/r3f' },
         ],
       },
     ],

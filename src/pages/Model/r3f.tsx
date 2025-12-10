@@ -122,7 +122,7 @@ const Scene: React.FC<SceneProps> = (props) => {
 }
 
 const Model: React.FC = () => {
-  const [meshType, setMeshType] = useState<ModelType>('point');
+  const [modelType, setModelType] = useState<ModelType>('point');
 
   return (
     <div className={styles.container}>
@@ -135,7 +135,7 @@ const Model: React.FC = () => {
           position: [200, 200, 200],
         }}
       >
-        <Scene meshType={meshType} />
+        <Scene meshType={modelType} />
       </Canvas>
       <Select<ModelType>
         className={styles.select}
@@ -146,8 +146,8 @@ const Model: React.FC = () => {
           { label: '平面', value: 'plane' },
           { label: '圆柱体', value: 'cylinder' },
         ]}
-        value={meshType}
-        onChange={setMeshType}
+        value={modelType}
+        onChange={setModelType}
       />
     </div>
   );

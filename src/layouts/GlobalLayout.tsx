@@ -6,7 +6,14 @@ import zhCN from 'antd/es/locale/zh_CN';
 import { MessageInstance } from 'antd/es/message/interface';
 import { NotificationInstance } from 'antd/es/notification/interface';
 import { ModalStaticFunctions } from 'antd/es/modal/confirm';
+import { Line } from 'three';
+import { extend } from '@react-three/fiber';
 import theme from './theme';
+
+// Add class `Line` as `Line_` to react-three-fiber's extend function. This
+// makes it so that when you use <line_> in a <Canvas>, the three reconciler
+// will use the class `Line`
+extend({ Line_: Line });
 
 // 对静态方法做处理以使用主题配置
 let message: MessageInstance;

@@ -39,7 +39,7 @@ const Guide: React.FC = () => {
         <Typography.Title level={2}>材质颜色和纹理贴图</Typography.Title>
         <ul>
           <li><Link to='/material-texture'>Native</Link></li>
-          {/* <li><Link to='/material-texture-r3f'>react-three-fiber</Link></li> */}
+          <li><Link to='/material-texture-r3f'>react-three-fiber</Link></li>
         </ul>
       </Typography>
     </div>
