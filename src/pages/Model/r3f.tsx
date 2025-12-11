@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { BufferAttribute, BufferGeometry, DoubleSide } from 'three';
+import React, { useEffect, useState } from 'react';
+import { DoubleSide } from 'three';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Select } from 'antd';
@@ -46,19 +46,9 @@ const Line: React.FC = () => {
 }
 
 const Mesh: React.FC = () => {
-  const geometryRef = useRef<BufferGeometry>(null);
-
-  useEffect(() => {
-    const geometry = geometryRef.current;
-    const indexes = new Uint16Array([0, 1, 2, 2, 1, 3]);
-    if (geometry) {
-      geometry.index = new BufferAttribute(indexes, 1);
-    }
-  }, []);
-
   return (
     <mesh>
-      <bufferGeometry ref={geometryRef}>
+      <bufferGeometry>
         <bufferAttribute
           attach='attributes-position'
           args={[new Float32Array([
@@ -67,6 +57,10 @@ const Mesh: React.FC = () => {
             0, 100, 0,
             100, 100, 0,
           ]), 3]}
+        />
+        <bufferAttribute
+          attach='index'
+          args={[new Uint16Array([0, 1, 2, 2, 1, 3]), 1]}
         />
       </bufferGeometry>
       <meshBasicMaterial color='orange' side={DoubleSide} />
