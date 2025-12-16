@@ -44,7 +44,7 @@ const Guide: React.FC = () => {
         <Typography.Title level={2}>uv 坐标和 uv 动画</Typography.Title>
         <ul>
           <li><Link to='/uv'>Native</Link></li>
-          {/* <li><Link to='/uv-r3f'>react-three-fiber</Link></li> */}
+          <li><Link to='/uv-r3f'>react-three-fiber</Link></li>
         </ul>
       </Typography>
     </div>

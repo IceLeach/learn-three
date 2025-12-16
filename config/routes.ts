@@ -21,7 +21,7 @@ export default [
           { path: '/material-texture', component: './MaterialTexture' },
           { path: '/material-texture-r3f', component: './MaterialTexture/r3f' },
           { path: '/uv', component: './Uv' },
-          // { path: '/uv-r3f', component: './Uv/r3f' },
+          { path: '/uv-r3f', component: './Uv/r3f' },
         ],
       },
     ],
