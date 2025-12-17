@@ -21,7 +21,7 @@ const createLineMap = {
       new Vector2(0, 0),
       new Vector2(50, -50),
       new Vector2(100, -30),
-      new Vector2(100, 0)
+      new Vector2(100, 0),
     ];
     const curve = new SplineCurve(arr);
     const pointsList = curve.getPoints(20);

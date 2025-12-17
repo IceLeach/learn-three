@@ -49,7 +49,7 @@ const Guide: React.FC = () => {
         <Typography.Title level={2}>如何画各种曲线</Typography.Title>
         <ul>
           <li><Link to='/curve'>Native</Link></li>
-          {/* <li><Link to='/curve-r3f'>react-three-fiber</Link></li> */}
+          <li><Link to='/curve-r3f'>react-three-fiber</Link></li>
         </ul>
       </Typography>
     </div>
