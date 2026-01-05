@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AxesHelper, BufferGeometry, Color, CubicBezierCurve3, CurvePath, EllipseCurve, Line, LineBasicMaterial, LineCurve, PerspectiveCamera, Points, PointsMaterial, QuadraticBezierCurve, Scene, SplineCurve, Vector2, Vector3, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import { Select } from 'antd';
@@ -114,9 +114,9 @@ type CreateLineType = keyof typeof createLineMap;
 
 const Curve: React.FC = () => {
   const [lineType, setLineType] = useState<CreateLineType>();
-  const sceneRef = React.useRef<Scene>();
-  const lineRef = React.useRef<Line>();
-  const ref = React.useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<Scene>();
+  const lineRef = useRef<Line>();
+  const ref = useRef<HTMLDivElement>(null);
 
   const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
     const { renderer, camera } = data;

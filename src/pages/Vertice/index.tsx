@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AxesHelper, BoxGeometry, BufferAttribute, BufferGeometry, Color, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import { Select } from 'antd';
@@ -67,9 +67,9 @@ type CreateMeshType = keyof typeof createMeshMap;
 
 const Vertice: React.FC = () => {
   const [meshType, setMeshType] = useState<CreateMeshType>();
-  const sceneRef = React.useRef<Scene>();
-  const meshRef = React.useRef<Mesh>();
-  const ref = React.useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<Scene>();
+  const meshRef = useRef<Mesh>();
+  const ref = useRef<HTMLDivElement>(null);
 
   const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
     const { renderer, camera } = data;

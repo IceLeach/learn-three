@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AxesHelper, BufferAttribute, BufferGeometry, Color, CylinderGeometry, DoubleSide, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Points, PointsMaterial, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import { Select } from 'antd';
@@ -83,9 +83,9 @@ type CreateModelType = keyof typeof createModelMap;
 
 const Model: React.FC = () => {
   const [modelType, setModelType] = useState<CreateModelType>();
-  const sceneRef = React.useRef<Scene>();
-  const modelRef = React.useRef<ModelType>();
-  const ref = React.useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<Scene>();
+  const modelRef = useRef<ModelType>();
+  const ref = useRef<HTMLDivElement>(null);
 
   const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
     const { renderer, camera } = data;

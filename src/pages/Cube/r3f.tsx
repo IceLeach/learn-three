@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BoxGeometry, Mesh, MeshLambertMaterial, Object3DEventMap, PointLight } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
 import { Canvas, useThree } from '@react-three/fiber';
@@ -46,8 +46,8 @@ const Gui: React.FC<GuiProps> = (props) => {
 
 const Scene: React.FC = () => {
   const { camera } = useThree();
-  const meshRef = React.useRef<MeshType>(null);
-  const pointLightRef = React.useRef<PointLight>(null);
+  const meshRef = useRef<MeshType>(null);
+  const pointLightRef = useRef<PointLight>(null);
 
   useEffect(() => {
     camera.lookAt(0, 0, 0);

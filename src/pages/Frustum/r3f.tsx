@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CameraHelper, PerspectiveCamera } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
 import { Canvas, useThree } from '@react-three/fiber';
@@ -39,7 +39,7 @@ const Gui: React.FC<GuiProps> = (props) => {
 
 const Scene: React.FC = () => {
   const { camera } = useThree();
-  const cameraRef = React.useRef<PerspectiveCamera>(null);
+  const cameraRef = useRef<PerspectiveCamera>(null);
 
   useEffect(() => {
     camera.lookAt(0, 0, 0);

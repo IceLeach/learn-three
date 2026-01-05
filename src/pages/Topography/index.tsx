@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Color, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import { createNoise2D } from 'simplex-noise';
@@ -10,7 +10,7 @@ const noiseZ = (x: number, y: number) => {
 }
 
 const Topography: React.FC = () => {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
     const { renderer, camera } = data;

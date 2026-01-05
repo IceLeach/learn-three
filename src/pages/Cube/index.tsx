@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { AxesHelper, BoxGeometry, Mesh, MeshLambertMaterial, Object3DEventMap, PerspectiveCamera, PointLight, Scene, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
@@ -7,7 +7,7 @@ import styles from './index.less';
 type MeshType = Mesh<BoxGeometry, MeshLambertMaterial, Object3DEventMap>;
 
 const Cube: React.FC = () => {
-  const ref = React.useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const resetSize = (data: { renderer: WebGLRenderer, camera: PerspectiveCamera }) => {
     const { renderer, camera } = data;

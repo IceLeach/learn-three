@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BoxGeometry, Line, RepeatWrapping, SRGBColorSpace, TextureLoader } from 'three';
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -8,7 +8,7 @@ import zhuan from './zhuan.jpg';
 import styles from './index.less';
 
 const LineDashed: React.FC = () => {
-  const lineRef = React.useRef<Line>(null);
+  const lineRef = useRef<Line>(null);
 
   useFrame(() => {
     lineRef.current?.computeLineDistances();
