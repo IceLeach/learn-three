@@ -24,6 +24,8 @@ export default [
           { path: '/uv-r3f', component: './Uv/r3f' },
           { path: '/curve', component: './Curve' },
           { path: '/curve-r3f', component: './Curve/r3f' },
+          { path: '/cloudscape', component: './Cloudscape' },
+          { path: '/cloudscape-r3f', component: './Cloudscape/r3f' },
         ],
       },
     ],
