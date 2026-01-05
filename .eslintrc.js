@@ -19,6 +19,7 @@ module.exports = {
           'transparent',
           'map',
           'aoMap',
+          'geometry',
         ],
       },
     ],
