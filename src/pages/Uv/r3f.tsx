@@ -1,18 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Select } from 'antd';
-import { MeshBasicMaterial, RepeatWrapping, SRGBColorSpace, TextureLoader } from 'three';
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { MeshBasicMaterial, RepeatWrapping, SRGBColorSpace } from 'three';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, useTexture } from '@react-three/drei';
 import bg from './bg.png';
 import muxing from './muxing.jpg';
 import styles from './index.less';
 
 const Coordinate: React.FC = () => {
-  const texture = useLoader(TextureLoader, bg);
-
-  useEffect(() => {
-    texture.colorSpace = SRGBColorSpace;
-  }, [texture]);
+  const texture = useTexture(bg, t => t.colorSpace = SRGBColorSpace);
 
   return (
     <mesh>
@@ -33,17 +29,15 @@ const Coordinate: React.FC = () => {
 }
 
 const Animation: React.FC = () => {
-  const texture = useLoader(TextureLoader, muxing);
+  const texture = useTexture(muxing, t => {
+    t.colorSpace = SRGBColorSpace;
+    t.wrapT = RepeatWrapping;
+  });
   const materialRef = useRef<MeshBasicMaterial>(null);
 
   useFrame(() => {
     materialRef.current?.map?.offset.setY(materialRef.current.map.offset.y + 0.01);
   });
-
-  useEffect(() => {
-    texture.colorSpace = SRGBColorSpace;
-    texture.wrapT = RepeatWrapping;
-  }, [texture]);
 
   return (
     <mesh>

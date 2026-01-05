@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BoxGeometry, Line, RepeatWrapping, SRGBColorSpace, TextureLoader } from 'three';
-import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import { BoxGeometry, Line, RepeatWrapping, SRGBColorSpace } from 'three';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, useTexture } from '@react-three/drei';
 import { Select } from 'antd';
 import diqiu from './diqiu.jpg';
 import zhuan from './zhuan.jpg';
@@ -32,11 +32,7 @@ const Plane: React.FC = () => {
 }
 
 const Earth: React.FC = () => {
-  const texture = useLoader(TextureLoader, diqiu);
-
-  useEffect(() => {
-    texture.colorSpace = SRGBColorSpace;
-  }, [texture]);
+  const texture = useTexture(diqiu, t => t.colorSpace = SRGBColorSpace);
 
   return (
     <mesh>
@@ -47,14 +43,12 @@ const Earth: React.FC = () => {
 }
 
 const Wall: React.FC = () => {
-  const texture = useLoader(TextureLoader, zhuan);
-
-  useEffect(() => {
-    texture.wrapS = RepeatWrapping;
-    texture.wrapT = RepeatWrapping;
-    texture.repeat.set(3, 3);
-    texture.colorSpace = SRGBColorSpace;
-  }, [texture]);
+  const texture = useTexture(zhuan, t => {
+    t.wrapS = RepeatWrapping;
+    t.wrapT = RepeatWrapping;
+    t.repeat.set(3, 3);
+    t.colorSpace = SRGBColorSpace;
+  });
 
   return (
     <mesh>
