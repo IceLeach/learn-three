@@ -56,6 +56,11 @@ const Guide: React.FC = () => {
           <li><Link to='/cloudscape'>Native</Link></li>
           <li><Link to='/cloudscape-r3f'>react-three-fiber</Link></li>
         </ul>
+        <Typography.Title level={2}>按照规律生成各种几何体</Typography.Title>
+        <ul>
+          <li><Link to='/geometry'>Native</Link></li>
+          <li><Link to='/geometry-r3f'>react-three-fiber</Link></li>
+        </ul>
       </Typography>
     </div>
   );
