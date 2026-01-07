@@ -28,6 +28,8 @@ export default [
           { path: '/cloudscape-r3f', component: './Cloudscape/r3f' },
           { path: '/geometry', component: './Geometry' },
           { path: '/geometry-r3f', component: './Geometry/r3f' },
+          { path: '/tunnel', component: './Tunnel' },
+          { path: '/tunnel-r3f', component: './Tunnel/r3f' },
         ],
       },
     ],
