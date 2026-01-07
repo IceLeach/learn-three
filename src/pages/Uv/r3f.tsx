@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Select } from 'antd';
 import { MeshBasicMaterial, RepeatWrapping, SRGBColorSpace } from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import bg from './bg.png';
 import muxing from './muxing.jpg';
@@ -60,12 +60,7 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = (props) => {
   const { meshType } = props;
-  const { camera } = useThree();
   const MeshComponent = meshMap[meshType];
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -89,6 +84,7 @@ const Uv: React.FC = () => {
           far: 1000,
           position: [0, 0, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene meshType={meshType} />
       </Canvas>

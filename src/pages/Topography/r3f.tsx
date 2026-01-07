@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Mesh } from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { createNoise2D } from 'simplex-noise';
 import styles from './index.less';
@@ -11,7 +11,6 @@ const noiseZ = (x: number, y: number) => {
 }
 
 const Scene: React.FC = () => {
-  const { camera } = useThree();
   const meshRef = useRef<Mesh>(null);
 
   const updatePosition = (mesh: Mesh) => {
@@ -35,10 +34,6 @@ const Scene: React.FC = () => {
   });
 
   useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
-
-  useEffect(() => {
     const mesh = meshRef.current;
     if (mesh) {
       const geometry = mesh.geometry;
@@ -58,8 +53,8 @@ const Scene: React.FC = () => {
       <mesh ref={meshRef}>
         <planeGeometry args={[3000, 3000, 100, 100]} />
         <meshBasicMaterial color='orange' wireframe />
-        <OrbitControls enableDamping={false} />
       </mesh>
+      <OrbitControls enableDamping={false} />
     </>
   );
 }
@@ -75,6 +70,7 @@ const Topography: React.FC = () => {
           far: 10000,
           position: [400, 150, 100],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene />
       </Canvas>

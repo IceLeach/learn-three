@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Select } from 'antd';
 import { BufferGeometry, CubicBezierCurve3, CurvePath, EllipseCurve, LineCurve, QuadraticBezierCurve, SplineCurve, Vector2, Vector3 } from 'three';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import styles from './index.less';
 
@@ -208,12 +208,7 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = (props) => {
   const { lineType } = props;
-  const { camera } = useThree();
   const LineComponent = meshMap[lineType];
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -237,6 +232,7 @@ const Curve: React.FC = () => {
           far: 1000,
           position: [0, 100, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene lineType={lineType} />
       </Canvas>

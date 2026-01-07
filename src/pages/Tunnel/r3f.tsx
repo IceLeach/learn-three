@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { CatmullRomCurve3, DoubleSide, RepeatWrapping, SRGBColorSpace, Vector3 } from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import stone from './stone.png';
 import styles from './index.less';
@@ -15,7 +15,6 @@ const path = new CatmullRomCurve3([
 ]);
 
 const Scene: React.FC = () => {
-  const { camera } = useThree();
   const texture = useTexture(stone, t => {
     t.wrapS = RepeatWrapping;
     t.colorSpace = SRGBColorSpace;
@@ -27,7 +26,7 @@ const Scene: React.FC = () => {
     return path.getSpacedPoints(1000);
   }, [path]);
 
-  useFrame(() => {
+  useFrame(({ camera }) => {
     const pointIndex = pointIndexRef.current;
     if (pointIndex < points.length - 1) {
       camera.position.copy(points[pointIndex]);
@@ -73,6 +72,7 @@ const Tunnel: React.FC = () => {
           far: 10000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene />
       </Canvas>

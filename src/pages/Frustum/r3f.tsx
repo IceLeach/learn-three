@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { CameraHelper, PerspectiveCamera } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { Helper, OrbitControls } from '@react-three/drei';
 import styles from './index.less';
 
@@ -38,12 +38,7 @@ const Gui: React.FC<GuiProps> = (props) => {
 }
 
 const Scene: React.FC = () => {
-  const { camera } = useThree();
   const cameraRef = useRef<PerspectiveCamera>(null);
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -67,6 +62,7 @@ const Frustum: React.FC = () => {
           far: 1000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene />
       </Canvas>

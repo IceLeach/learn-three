@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BoxGeometry, Mesh, MeshLambertMaterial, Object3DEventMap, PointLight } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import styles from './index.less';
 
@@ -45,13 +45,8 @@ const Gui: React.FC<GuiProps> = (props) => {
 }
 
 const Scene: React.FC = () => {
-  const { camera } = useThree();
   const meshRef = useRef<MeshType>(null);
   const pointLightRef = useRef<PointLight>(null);
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -78,6 +73,7 @@ const Cube: React.FC = () => {
           far: 1000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene />
       </Canvas>

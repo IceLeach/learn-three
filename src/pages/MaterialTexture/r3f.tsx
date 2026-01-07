@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { BoxGeometry, Line, RepeatWrapping, SRGBColorSpace } from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { Select } from 'antd';
 import diqiu from './diqiu.jpg';
@@ -73,12 +73,7 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = (props) => {
   const { meshType } = props;
-  const { camera } = useThree();
   const ModelComponent = modelMap[meshType];
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -102,6 +97,7 @@ const MaterialTexture: React.FC = () => {
           far: 10000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene meshType={modelType} />
       </Canvas>

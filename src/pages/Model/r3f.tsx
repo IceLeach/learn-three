@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DoubleSide } from 'three';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Select } from 'antd';
 import styles from './index.less';
@@ -98,12 +98,7 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = (props) => {
   const { meshType } = props;
-  const { camera } = useThree();
   const ModelComponent = modelMap[meshType];
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -128,6 +123,7 @@ const Model: React.FC = () => {
           far: 1000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene meshType={modelType} />
       </Canvas>

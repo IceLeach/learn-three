@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { BufferGeometry, EllipseCurve, Group, Vector3 } from 'three';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Line, OrbitControls } from '@react-three/drei';
 import styles from './index.less';
 
 const Scene: React.FC = () => {
-  const { camera } = useThree();
   const groupRef = useRef<Group>(null);
   const geometryRef = useRef<BufferGeometry>(null);
 
@@ -15,10 +14,6 @@ const Scene: React.FC = () => {
       item.rotation.z += 0.001 * index * flag;
     });
   });
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   useEffect(() => {
     const arc = new EllipseCurve(0, 0, 120, 120, 0, Math.PI * 2);
@@ -136,6 +131,7 @@ const Cloudscape: React.FC = () => {
           far: 10000,
           position: [0, 200, 600],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene />
       </Canvas>

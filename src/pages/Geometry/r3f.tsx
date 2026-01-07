@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { BufferGeometry, CubicBezierCurve3, DoubleSide, Mesh, Path, Shape, TubeGeometry, Vector2, Vector3 } from 'three';
 import GUI from 'three/addons/libs/lil-gui.module.min.js';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { Select } from 'antd';
 import styles from './index.less';
@@ -154,12 +154,7 @@ interface SceneProps {
 
 const Scene: React.FC<SceneProps> = (props) => {
   const { meshType } = props;
-  const { camera } = useThree();
   const MeshComponent = meshMap[meshType];
-
-  useEffect(() => {
-    camera.lookAt(0, 0, 0);
-  }, [camera]);
 
   return (
     <>
@@ -185,6 +180,7 @@ const Geometry: React.FC = () => {
           far: 10000,
           position: [200, 200, 200],
         }}
+        onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       >
         <Scene meshType={meshType} />
       </Canvas>
