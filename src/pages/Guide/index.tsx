@@ -66,6 +66,11 @@ const Guide: React.FC = () => {
           <li><Link to='/tunnel'>Native</Link></li>
           <li><Link to='/tunnel-r3f'>react-three-fiber</Link></li>
         </ul>
+        <Typography.Title level={2}>uv 动画实战：无限时空隧道</Typography.Title>
+        <ul>
+          <li><Link to='/infinite-tunnel'>Native</Link></li>
+          <li><Link to='/infinite-tunnel-r3f'>react-three-fiber</Link></li>
+        </ul>
       </Typography>
     </div>
   );

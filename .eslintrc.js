@@ -20,6 +20,7 @@ module.exports = {
           'map',
           'aoMap',
           'geometry',
+          'alphaMap',
         ],
       },
     ],
